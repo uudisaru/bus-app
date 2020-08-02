@@ -1,0 +1,11 @@
+digraph G {
+  http -> "bus-poller"
+  "bus-poller" -> Redis
+  Redis -> "bus-server 1"
+  Redis -> "..."
+  Redis -> "bus-server n"
+  "bus-server 1" -> "browser bus-ui app 1"
+  "bus-server 1" -> "browser bus-ui app 2"
+  "bus-server 1" -> " ... "
+  "bus-server n" -> "  ...  "
+}

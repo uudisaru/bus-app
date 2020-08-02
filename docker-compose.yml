@@ -1,0 +1,29 @@
+version: "2.4"
+services:
+  bus-redis:
+    container_name: bus-redis
+    hostname: bus-redis
+    image: redis
+  bus-poller:
+    container_name: bus-poller
+    depends_on:
+      - "bus-redis"
+    environment:
+      REDIS_HOST: "bus-redis"
+    hostname: bus-poller
+    image: trtd/bus-poller:latest
+  bus-server:
+    container_name: bus-server
+    depends_on:
+      - "bus-redis"
+    environment:
+      QUARKUS_HTTP_PORT: 80
+      REDIS_HOST: "bus-redis"
+    image: trtd/bus-server:1.0-SNAPSHOT
+    ports:
+      - "8980:80"
+  bus-ui:
+    hostname: bus-ui
+    image: trtd/bus-ui:latest
+    ports:
+      - "8880:80"

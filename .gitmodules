@@ -1,0 +1,9 @@
+[submodule "bus-poller"]
+	path = bus-poller
+	url = https://github.com/uudisaru/bus-poller
+[submodule "bus-server"]
+	path = bus-server
+	url = https://github.com/uudisaru/bus-server
+[submodule "bus-ui"]
+	path = bus-ui
+	url = https://github.com/uudisaru/bus-ui
