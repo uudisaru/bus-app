@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bus-poller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: bus-app
+        tier: backend
+  template:
+    metadata:
+      labels:
+        app: bus-app
+        tier: backend
+    spec:
+      containers:
+      - name: bus-poller
+        image: docker.io/trtd/bus-poller:7
+        env:
+        - name: GET_HOSTS_FROM
+          value: "dns"
+        - name: REDIS_HOST
+          value: "redis-leader"
+        resources:
+          requests:
+            cpu: 500m
+            memory: 500Mi

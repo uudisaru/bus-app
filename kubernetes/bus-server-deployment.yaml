@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bus-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        app: bus-app
+        tier: frontend
+  template:
+    metadata:
+      labels:
+        app: bus-app
+        tier: frontend
+    spec:
+      containers:
+      - name: bus-server
+        image: docker.io/trtd/bus-server:4
+        env:
+        - name: GET_HOSTS_FROM
+          value: "dns"
+        - name: REDIS_HOST
+          value: "redis-follower"
+        resources:
+          requests:
+            cpu: 300m
+            memory: 800Mi
+        ports:
+        - containerPort: 8095
